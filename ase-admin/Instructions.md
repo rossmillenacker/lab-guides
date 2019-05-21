@@ -180,3 +180,65 @@ Started guide above).
 
 Exercise 3 - Validate Environment with Hostchecker
 --------------------------------------------------
+**a. Validate Source Environment with Hostchecker**
+
+In this exercise, you will:
+  * Use the ‘hostchecker’ program to run validation tests on your Linux Source
+**Steps**
+    
+    a. Use Terminal to SSH into your Linux Source (see the Important IP Addresses section of the Getting
+Started guide above).
+ 
+    b. Go to the hostchecker directory created in the previous exercise and type: ./hostchecker.sh
+
+    c. Run hostchecker for a source and perform the following checks:
+
+        a. Check on the delphix homedir
+
+        b. Check the following ports on your Delphix Engine (10.0.x.10): 22,80,443
+    
+        c. Check for ssh connectivity
+    
+        d. Check for sudo privileges as the delphix user
+    
+        e. Check sshd_config for timeout
+    
+        f. Check the toolkit path of: **/u01/app/toolkit**
+
+If you have completed all of the checks and they have returned SUCCESS and ALL OK, you have completed
+this exercise.
+
+Note: The sshd_config test will return a WARNING response, which is normal in a production installation due
+to permissions on the file. If hostchecker is run as root for this test, it will perform the test properly.
+
+**b. Validate the Target Environment with Hostchecker**
+
+In this exercise, you will:
+  * Use the ‘hostchecker’ program to run validation tests on your Linux Target
+Steps
+
+    a. Use Terminal to SSH into your Linux Target A (see the Important IP Addresses section of the Getting
+Started guide above).
+
+    b. Untar the hostchecker_linux_x86.tar file in your home directory
+
+    c. Run hostchecker for a target and perform the following checks:
+
+        a. Check on the delphix homedir
+
+        b. Check the following ports on your Delphix Engine (10.0.x.10): 8415, 22, 111,1110
+        
+        c. Check for ssh connectivity
+        
+        d. Check for sudo privileges as the delphix user
+        
+        e. Check sshd_config for timeout
+
+        f. Check the toolkit path of: /u01/app/toolkit
+
+If you have completed all of the checks and they have returned SUCCESS and ALL OK, you have completed
+this exercise.
+
+Note: The sshd_config test will return a WARNING response, which is normal in a production installation due
+to permissions on the file. If hostchecker is run as root for this test, it will perform the test properly
+
