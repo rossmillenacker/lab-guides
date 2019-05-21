@@ -60,12 +60,123 @@ As an advanced exercise, this lab has no corresponding Lab Solution. Instead, we
     c.  Escape to the standard CLI prompt by typing: discard
     
     d.  You are now at the root of the Delphix CLI as a System Administrator
+3.  Create a storage test by typing: storage test create (see figure !!!)
+    
+    a.  List the default storage test parameters by typing get
+    
+    b.  Override the duration and set it to 5 minutes: set duration=5
+    
+    c.  Begin the storage test by typing: commit
+    
+    d.  Note that this test will take anywhere between 5-10 minutes to complete
+
+"![](./images/image1.png)"
+Example Storage Test Configuration
+
+4.  View the storage test results
+
+    a.  Get back to the storage test section of the CLI by typing: storage test list
+    
+    b.  View a list of completed tests by typing: ls
+    
+    c.  Type "select" followed by the name of the test from the list. For example: select STORAGE_TEST-1
+    
+    d.  Enter the result command by typing: result
+    
+    e.  Then type: commit
+    
+ "[](./images/impage2.png)"
+ Example Storage Test Results
 
 Exercise 1 - Delphix Engine Configuration
 -----------------------------------------
 
+In this exercise, you will:
+* Access the Delphix Engine GUI for the first time
+* Set up the Delphix SYSADMIN user
+* Set up the Delphix DELPHIX_ADMIN user
+* Configure Timezone Preferences
+* Configure Network Settings
+* Configure Disks
+* Complete the Delphix Engine Configuration
+
+**Steps**
+1.  Connect to your Delphix Engine using Firefox on your lab server (see the Important IP Addresses
+section of the Getting Started guide above).
+2.  Set the new sysadmin password to: delphix
+3.  Configure the Delphix Engine with the following details:
+
+    a. NTP on using pool.ntp.org with your local timezone
+   
+    b. Default network settings
+    
+    c. Three 5GB volumes in the data pool
+    
+    d. Default Serviceability options
+    
+    e. Default Authentication Service options
+
+    f. Appliance marked registered (no support credentials are required for this lab)
+    
+    g. Completed and saved System setup.
+
+4. Log in with the initial delphix_admin user credentials
+5. Set the new delphix_admin password to: delphix
+You will know this is successful when you see the main Delphix UI screen with a single group (Untitled) on the
+left hand side.
+
+**HOLD - PLACEHOLDER FOR DOCS.DELPHIX LINKS ADMIN/SYSADMIN USER ROLES & SETTING UP THE DELPHIX ENGINE**
+
 Exercise 2 - Create delphix_disc login on Source and delphix_db login on target
 -------------------------------------------------------------------------------
+
+In this exercise, you will:
+* Create a Delphix delphix_disc user on your source Sybase Instance
+* Create a Delphix delphix_db user on your target Sybase Instance
+
+**Steps**
+1.  Use Terminal to SSH into your Linux Source (see the Important IP Addresses section of the Getting
+Started guide above).
+2.  Execute the following on the source instance
+    
+    a.  Create delphix_disc user with select on privileges on sysdatabases, sysservers, and
+syslisteners:
+    
+    ```
+    isql –Usa –Pdelphixdb –SLINUXSOURCE
+    sp_addlogin delphix_disc, delphix_disc
+    go
+    sp_adduser delphix_disc
+    go
+    grant select on sysdatabases to delphix_disc
+    go
+    grant select on sysservers to delphix_disc
+    go
+    grant select on syslisteners to delphix_disc
+    go
+    exit
+    ```
+
+**Steps**
+1.  Use Terminal to SSH into your Linux Target (see the Important IP Addresses section of the Getting
+Started guide above).
+2.  Execute the following on the target instance
+
+    a.  Create delphix_db user and grant sa_role and sybase_ts_role to delphix_db login
+
+    ```
+    isql –Usa –Pdelphixdb –SLINUXTARGET
+    sp_addlogin delphix_db, delphix_db
+    go
+    sp_adduser delphix_db
+    go
+    sp_role “grant”, sa_role, delphix_db
+    go
+    sp_role “grant”, sybase_ts_role, delphix_db
+    go
+    exit
+    ```
+
 
 Exercise 3 - Validate Environment with Hostchecker
 --------------------------------------------------
