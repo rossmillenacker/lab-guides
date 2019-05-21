@@ -7,7 +7,7 @@ Table of Contents
 
 * [Optional Advanced Exercise – Perform a Storage Performance Test through the CLI](#Optional-Advanced-Exercise-Perform-a-Storage-Performance-Test-through-the-CLI)
 
-* [Exercise 1 - Delphix Engine Configuration](#Exercise-1-Delphix-Engine-Configuration)
+* [Exercise 1 - Delphix Engine Configuration](#Exercise-1---Delphix-Engine-Configuration)
 
 * [Exercise 2 - Create delphix_disc login on Source and delphix_db login on target](#Exercise-2-Create-delphix_disc-login-on-Source-and-delphix_db-login-on-target)
 
@@ -242,3 +242,191 @@ this exercise.
 Note: The sshd_config test will return a WARNING response, which is normal in a production installation due
 to permissions on the file. If hostchecker is run as root for this test, it will perform the test properly
 
+Exercise 4 - Add a Source and Target Environment
+------------------------------------------------
+
+In this exercise, you will:
+
+* Connect Delphix to your Source Sybase Server
+* Create a Sybase dSource by syncing with your Sybase Source database
+* Create a Delphix Group to hold your dSource object
+    
+**a. Adding Source Environment**
+
+**Steps**
+
+1. Log into the Delphix Engine as delphix_admin
+2. Add your Linux Source as an Environment with the following details:
+        
+    a. Environment Name: Source
+        
+    b. Host Address: 10.0.x.20 (‘x’ will be your Student Number)
+    
+    c. OS Username: delphix
+        
+    d. OS Password: delphix
+        
+    e. Toolkit Path: /u01/app/toolkit
+
+    f. Check Discover SAP ASE checkbox
+        
+    g. SAP ASE Discovery credentials
+
+     i. ASE DB Username: delphix_disc
+        
+     ii. ASE DB Password: delphix_disc
+
+You should now see the Source environment listed under the Environments panel.
+
+**b. Adding a Target Environment**
+
+**Steps**
+
+1. Log into the Delphix Engine as delphix_admin
+2. Add your Linux Source as an Environment with the following details:
+    a. Environment Name: Target
+    
+    b. Host Address: 10.0.x.30 (‘x’ will be your Student Number)
+    
+    c. OS Username: delphix
+    
+    d. OS Password: delphix
+    
+    e. Toolkit Path: /u01/app/toolkit
+    
+    f. SAP ASE Discovery credentials
+        
+      i. ASE DB Username: delphix_db
+        
+      ii. ASE DB Password: delphix_db
+
+You should now see the Target environment listed under the Environments panel
+
+Exercise 5 - Link a dSource
+---------------------------
+
+Perform the following steps after the Source and Target Environment is created:
+1. SSH to Linux Target A as the delphix user
+
+  >Run the following commands:
+
+```
+  cd /home/delphix/labs
+  ./dumpfull_testdb.sh
+```
+
+2. From the Delphix admin console click the Source environment on the left side of the screen
+3. Click the Databases tab (marked by a large database icon) on the right hand side of your screen
+4. Under LINUXSOURCE > testdb, click Add dSource
+5. Under the entry testdb, enter the details (case sensitive).
+  >The username/password you created in Exercise 2.
+
+    a. Database Username: delphix_disc
+
+    b. DB Password: delphix_disc
+
+    c. Verify Credentials
+
+6. Click Next
+7. Keep default dSource Name of testdb
+8. Create a new Target Group called DB Source and assign the dSource to the group by clicking on the
+group name
+9. Go to the Data Management screen and fill in the following information
+
+    c. On Initial Load, choose Most Recent Existing Full Backup
+
+    d. Backup Location, Enter: /u02/sybase_back
+    
+    e. Staging Environment, choose Target and LINUXTARGET
+
+    f. LogSync, click Enabled
+
+10. Accept defaults for the Hooks
+11. Click Finish on the Summary screen
+
+You will know this is successful if the dSource completes in the Actions pane without Errors. Click on Actions
+in the top menu bar if you don’t see this pane.
+
+Click on Delphix logo to go to the home screen. The dSource testdb should be listed under the DB Source
+group.
+
+Exercise 6 - Create and Save a Hook Operation Template
+------------------------------------------------------
+
+In this exercise, you will:
+
+* Create a Hook Operation Template called APPUSER
+* Insert code into the template that will log into a database and add a user named appuser
+
+**Steps**
+
+1. Create a new Hook Operation Template called: Create APPUSER
+    
+    a. Select Manage > Operation Templates from the menu
+    
+    b. Click on the green plus (+) icon
+    
+    c. Type: Shell Command
+    
+    d. Contents (enter exactly):
+```
+$SYBASE/OCS-15_0/bin/isql –Usa –Pdelphixdb –SLINUXTARGET << EOF
+sp_addlogin appuser,appuser
+go
+sp_adduser appuser
+go
+EOF
+```
+
+**IMPORTANT: Make sure the carriage returns you see here are the same in the pasted contents.**
+
+    e. Click the Create button
+
+2. Verify the Hook Operation Template appears in the list
+3. Click Close to exit the Operation Template screen
+
+Exercise 7 - Provision a VDB
+----------------------------
+
+In this exercise, you will:
+
+* Create a VDB called devdb
+* Use the Hook Operation Template we created previously
+* Log into the VDB
+* Verify the Hook Operation Template were successful
+Steps
+
+1. Select the testdb dSource and Provision a VDB with the following details:
+    
+    a. Destination Environment: Target
+    
+    b. Database Name: devdb
+    
+    c. Truncate Log On Checkpoint: Enabled
+    
+    d. Configure Clone hook: Create APPUSER
+    
+    e. VDB Name: devdb
+
+    f. Target Group: DB Target
+    
+    g. Snapshot Policy: Default Snapshot
+
+2. Complete the VDB creation
+
+  >It may take a couple minutes for the VDB creation to complete. You can monitor the progress on the left hand
+  >side of the screen next to the devdb object in the DB Targets group. On the Actions pane on the right hand
+  >side of the screen, you should see the Provision virtual database “devdb” item move to the Recently completed
+  >pane without error. Once the VDB is created, you can verify that the VDB is operational by:
+3. SSH to Linux Target A as the delphix user
+4. Run the following commands:
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+sp_helpdb devdb
+go
+sp_displaylogin appuser
+go
+```
+
+This will verify that the VDB is online with the VDB Operation Template we specified, and that the appuser user
+was created by our hook.
