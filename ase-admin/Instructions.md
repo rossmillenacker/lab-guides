@@ -50,12 +50,12 @@ In this exercise, you will:
 
 As an advanced exercise, this lab has no corresponding Lab Solution. Instead, we will walk through the steps to get you acquainted with your lab system and the Delphix CLI.
 
-1.  On your Lab Server desktop, double-click on Terminal
-2.  Type: ssh <sysadmin@10.0.x.10> ('x' is your **Student Number** assigned by your instructor)
- a.  If you receive a prompt asking you if you are sure you want to connect, enter: Yes
- b.  Enter the password: sysadmin
- c.  Escape to the standard CLI prompt by typing: discard
- d.  You are now at the root of the Delphix CLI as a System Administrator
+1.On your Lab Server desktop, double-click on Terminal
+2.Type: ssh <sysadmin@10.0.x.10> ('x' is your **Student Number** assigned by your instructor)
+ a.If you receive a prompt asking you if you are sure you want to connect, enter: Yes
+ b.Enter the password: sysadmin
+ c.Escape to the standard CLI prompt by typing: discard
+ d.You are now at the root of the Delphix CLI as a System Administrator
 
 Exercise 1 - Delphix Engine Configuration
 -----------------------------------------
