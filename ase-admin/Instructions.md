@@ -560,3 +560,155 @@ go
 
 The count should return 2 rows, and the database is online.
 
+Optional Advanced Exercise - Measure Network Performance through the CLI
+------------------------------------------------------------------------
+
+In this exercise, you will:
+* Log into the Delphix Engine CLI as delphix_admin
+* Perform a network latency test to TargetA
+* Perform a network throughput test to TargetA
+
+**Steps**
+
+As an advanced exercise, this lab has no corresponding Lab Solution. Instead, we will walk through the steps
+to get you acquainted the Delphix CLI for delphix_admin.
+
+1. On your Lab Server desktop, double-click on Terminal
+2. Type: ssh delphix_admin@10.0.x.10 (‘x’ is your Student Number assigned by your instructor)
+
+    a. If you receive a prompt asking you if you are sure you want to connect, enter: Yes
+
+    b. Enter the password: delphix
+
+    c. You are now at the root of the Delphix CLI as a Delphix Administrator
+
+3. Create a network latency test by typing: network test latency create
+    
+    a. List the default/required parameters by typing: get
+    
+    b. Set the remoteHost value to the TargetA environment IP address: set remoteHost=10.0.x.30 (‘x'
+will be your Student Number)
+
+    c. Begin the test by typing: commit
+
+ `![](./images/image12.png) - latency test submission example image 3`
+ Example Network Latency Test Submission
+ 
+4. View the results of the latency test:
+    a. Get to the latency test section again by typing: network test latency
+
+    b. List the completed tests by typing: ls
+
+    c. Type “select” followed by the name of the test from the list. For example: select 10.0.1.30-2015-
+09-18T12:47:19.711Z
+
+    d. View the results of the test by typing: get
+
+ `![](./images/image12.png) - latency test results example image 4`
+Example Latency Test Results
+
+5. Create a network throughput test
+
+    a. While still logged into the CLI, return to the root by typing: cd /
+
+    b. Begin a network throughput test by typing: network test throughput create
+
+    c. List the default/required parameters by typing: get
+
+    d. Set the remoteHost value to the TargetA environment IP address: set remoteHost=10.0.x.30 (‘x’
+will be your Student Number)
+    
+    e. Begin the test by typing: commit
+    
+ `![](./images/image12.png) - throughput test submission example image 5`
+Example Network Throughput Test Submission
+
+6. View the results of the throughput test:
+    
+    a. Get to the throughput test section again by typing: network test throughput
+    
+    b. List the completed tests by typing: ls
+    
+    c. Type “select” followed by the name of the test from the list. For example: select 10.0.1.30-2015-
+09-18T13:13:08.152Z
+
+    d. View the results of the test by typing: get
+
+ `![](./images/image12.png) - throughput test results example image 6`
+Example Network Throughput Test Results
+
+Optional Advanced Exercise - Configure Delphix Replication
+----------------------------------------------------------
+
+Note: This exercise is only possible if your classroom has been configured with 2 or more students.
+
+In this exercise, you will:
+* Set up a replication profile
+* Replicate your entire Delphix Engine to another Delphix Engine
+* View the replicas in the target Delphix Engine
+
+**Steps**
+
+As an advanced exercise, this lab has no corresponding Lab Solution. Instead, we will walk through the steps
+to get you acquainted the Delphix Replication capability.
+
+1. In the Delphix GUI, select System and then Replication on the top menu bar
+2. Add a Replication Profile called DR Replica
+    
+  a. Click the plus sign next to Replication Profiles on the top left
+
+  b. Enter a Replica Profile Name: DR Replica
+    
+  c. For Target Engine, enter the Delphix Engine IP address for the next student in your classroom
+environment. If you are the last student, use the Delphix Engine IP address for Student 1. For
+example, in a class with 3 students:
+    
+    i. Student 1 Delphix Engine is at 10.0.1.10, and they will replicate to 10.0.2.10
+    ii. Student 2 Delphix Engine is at 10.0.2.10, and they will replicate to 10.0.3.10
+    iii. Student 3 Delphix Engine is at 10.0.3.10, and they will replicate to 10.0.1.10
+    iv. Ask your instructor if you have any questions or confusion about this configuration.
+
+  d. Enter the User Name: delphix_admin
+  
+  e. Enter the Password: delphix
+
+  f. Do not enable Automatic Replication or configure Traffic Options
+
+  g. For the Objects Being Replicated, select: Entire Delphix Engine
+  
+  h. Click Create at the bottom when ready.
+
+3. Start the Replication by clicking the Replicate Now button on the top right of your screen.
+4. Click Replicate to confirm you are ready to begin.
+5. Once the initial full replication is complete, you will see a message stating “Last Replication
+Successful.”
+
+ `![](./images/image12.png) - Replication Success Screen - Image 7`
+ Example Successful Replication
+ 
+6. Check the results on your target Delphix Engine
+  
+  a. In your lab server browser, enter the IP address you used for the Target Engine in your replica
+profile. For example, if you are Student 1, your Delphix Engine is at 10.0.1.10, and your target
+would have been 10.0.2.10.
+  
+  b. Log in as user delphix_admin with the password delphix
+Lab Exercises 21 © 2015 Delphix Corp. All rights reserved
+
+  c. Observe the dropdown list next to Databases on the top left corner of your screen. It currently
+says Available which is the default Namespace for Delphix replica targets.
+
+  d. In order to see the replica objects, click on the dropdown list and select the second entry, which
+should be the IP address of the Source Delphix Engine that sent the replica.
+
+ `![](./images/image12.png) - Example Replica Namespace View - Image 8`
+ Example Replica Namespace View
+ 
+7. While still logged into your target Delphix Engine, click on System and then Replication
+8. Observe the Received Replicas section at the bottom, indicating and verifying the target’s receipt of
+replication data.
+  a. Note: The Failover Now option will not work for these labs unless all objects on the target
+engine are deleted due to object name collisions. This is an inherent outcome to plan for when
+using Active/Active replication. By sending/receiving replication data, this concludes the
+Replication exercise. 
+
