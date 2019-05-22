@@ -430,3 +430,133 @@ go
 
 This will verify that the VDB is online with the VDB Operation Template we specified, and that the appuser user
 was created by our hook.
+
+Exercise 8 - Set a New Retention Policy
+---------------------------------------
+
+There are four types of Policies in Delphix. In this exercise, you will:
+* Create a Retention Policy
+* Set the new policy to keep snapshots and logs for 30 days, along with 3 monthly snapshots
+* Apply the policy to the VDB we created in the previous exercise
+
+**Steps**
+
+1. Navigate to Manage -> Policies
+2. Create a new Retention policy for devdb with the following details:
+
+    a. Name: Long Term
+
+    b. 30 days of snapshot and log retention
+    
+    c. 3 monthly snapshots taken on the 1st of the month
+    
+Exercise 9 - Refresh a VDB
+--------------------------
+
+In this exercise, you will:
+
+* Create a new table on your source database
+* Snapshot the dSource
+* Refresh your VDB
+* Verify the new table appears on the VDB
+
+**Steps**
+
+1. Connect to your Linux Source server as the delphix user via SSH
+2. Run the following commands:
+
+```
+isql –Usa –Pdelphixdb –SLINUXSOURCE
+use testdb
+go
+create table t1 ( comments varchar(100))
+go
+insert into t1 values (‘test data’)
+go
+exit
+```
+
+Take a transaction log dump on testdb
+```
+cd /home/delphix/labs
+./dumptran_testdb.sh
+```
+
+3. Go back to the Delphix Engine
+4. Wait for a minute or two for Delphix Engine to ingest the new transaction log dump.
+
+Note: A new dSource card should appear after the transaction log has been ingested
+
+5. Select the devdb VDB and click the small Open button ( )
+6. Refresh the devdb VDB using the latest snapshot from the testdb dSource
+
+Once the refresh has completed, you can log into devdb to confirm.
+
+7. Connect to your Linux Target A server as the delphix user via SSH
+8. Run the following commands:
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+use devdb
+go
+select * from t1
+go
+```
+
+If this returns a count of row, the snapshot/refresh was successful.
+
+Exercise 10 - Rewind a VDB
+--------------------------
+
+In this exercise, you will:
+
+* Take a snapshot of the devdb VDB
+* Drop a table in the devdb VDB
+* Rewind the devdb VDB to recover from the action
+
+**Steps**
+
+1. Connect to your Linux Target A server as the delphix user via SSH
+2. Run the following commands:
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+use devdb
+go
+insert into t1 values (‘before rewind’)
+go
+```
+
+3. Take a snapshot of the devdb VDB
+4. Run the following commands
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+use devdb
+go
+drop table t1
+go
+```
+
+We just dropped t1 table. Now we will rewind the VDB to that last good snapshot to fix this.
+
+5. Select the devdb VDB
+6. Select the snapshot card associated with the date/time you recorded prior to corrupting your database.
+7. Rewind the VDB to the snapshot card you took prior to the corruption.
+Once the rewind operation is complete, you can confirm the rewind was successful by connecting to the server
+
+again and querying the database:
+
+8. Connect to your Linux Target A server as the delphix user via SSH
+9. Run the following commands:
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+use devdb
+go
+select * from t1
+go
+```
+
+The count should return 2 rows, and the database is online.
+
