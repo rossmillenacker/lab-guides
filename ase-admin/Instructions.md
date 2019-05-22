@@ -31,6 +31,24 @@ Table of Contents
 
 * [Optional Advanced Exercise – Measure Network Performance through the CLI](#Optional-Advanced-Exercise-Measure-Network-Performance-through-the-CLI)
 
+* [Lab Solutions](#lab-solutions)
+
+* [Exercise 1 – Delphix Engine	Configuration](#exercise1_sol)
+
+* [Exercise 2 – Create	delphix_disc login on Source and delphix_db	login on Target](#Exercise 2 - Create delphix_disc login on Source and delphix_db login on Target)
+
+*  [Exercise 3 – Validate the Source & Target Environments with Hostchecker](#Exercise 3 – Validate the Source and Targets Environment with Hostchecker)
+
+*  [Exercise 4 – Add a Source and Target Environment](#Exercise 4 – Add a Source and Target Environment)
+
+*  [Exercise 5 – Link a dSource](#Exercise 5 – Link a dSource)
+
+*  [Exercise 7 – Provision a VDB](#Exercise 7 – Provision a VDB)
+
+*  [Exercise 9 – Refresh a VDB](#Exercise 9 – Refresh a VDB)
+
+*  [Exercise 10 – Rewind a VDB](#Exercise 10 – Rewind a VDB)
+
 Lab Exercises
 =============
 
@@ -655,28 +673,28 @@ to get you acquainted the Delphix Replication capability.
 1. In the Delphix GUI, select System and then Replication on the top menu bar
 2. Add a Replication Profile called DR Replica
     
-  a. Click the plus sign next to Replication Profiles on the top left
+    a. Click the plus sign next to Replication Profiles on the top left
 
-  b. Enter a Replica Profile Name: DR Replica
+    b. Enter a Replica Profile Name: DR Replica
     
-  c. For Target Engine, enter the Delphix Engine IP address for the next student in your classroom
+    c. For Target Engine, enter the Delphix Engine IP address for the next student in your classroom
 environment. If you are the last student, use the Delphix Engine IP address for Student 1. For
 example, in a class with 3 students:
     
-    i. Student 1 Delphix Engine is at 10.0.1.10, and they will replicate to 10.0.2.10
-    ii. Student 2 Delphix Engine is at 10.0.2.10, and they will replicate to 10.0.3.10
-    iii. Student 3 Delphix Engine is at 10.0.3.10, and they will replicate to 10.0.1.10
-    iv. Ask your instructor if you have any questions or confusion about this configuration.
+      i. Student 1 Delphix Engine is at 10.0.1.10, and they will replicate to 10.0.2.10
+      ii. Student 2 Delphix Engine is at 10.0.2.10, and they will replicate to 10.0.3.10
+      iii. Student 3 Delphix Engine is at 10.0.3.10, and they will replicate to 10.0.1.10
+      iv. Ask your instructor if you have any questions or confusion about this configuration.
 
-  d. Enter the User Name: delphix_admin
+    d. Enter the User Name: delphix_admin
   
-  e. Enter the Password: delphix
+    e. Enter the Password: delphix
 
-  f. Do not enable Automatic Replication or configure Traffic Options
+    f. Do not enable Automatic Replication or configure Traffic Options
 
-  g. For the Objects Being Replicated, select: Entire Delphix Engine
+    g. For the Objects Being Replicated, select: Entire Delphix Engine
   
-  h. Click Create at the bottom when ready.
+    h. Click Create at the bottom when ready.
 
 3. Start the Replication by clicking the Replicate Now button on the top right of your screen.
 4. Click Replicate to confirm you are ready to begin.
@@ -688,17 +706,17 @@ Successful.”
  
 6. Check the results on your target Delphix Engine
   
-  a. In your lab server browser, enter the IP address you used for the Target Engine in your replica
+    a. In your lab server browser, enter the IP address you used for the Target Engine in your replica
 profile. For example, if you are Student 1, your Delphix Engine is at 10.0.1.10, and your target
 would have been 10.0.2.10.
   
-  b. Log in as user delphix_admin with the password delphix
+    b. Log in as user delphix_admin with the password delphix
 Lab Exercises 21 © 2015 Delphix Corp. All rights reserved
 
-  c. Observe the dropdown list next to Databases on the top left corner of your screen. It currently
+    c. Observe the dropdown list next to Databases on the top left corner of your screen. It currently
 says Available which is the default Namespace for Delphix replica targets.
 
-  d. In order to see the replica objects, click on the dropdown list and select the second entry, which
+    d. In order to see the replica objects, click on the dropdown list and select the second entry, which
 should be the IP address of the Source Delphix Engine that sent the replica.
 
  `![](./images/image12.png) - Example Replica Namespace View - Image 8`
@@ -707,8 +725,135 @@ should be the IP address of the Source Delphix Engine that sent the replica.
 7. While still logged into your target Delphix Engine, click on System and then Replication
 8. Observe the Received Replicas section at the bottom, indicating and verifying the target’s receipt of
 replication data.
-  a. Note: The Failover Now option will not work for these labs unless all objects on the target
+    a. Note: The Failover Now option will not work for these labs unless all objects on the target
 engine are deleted due to object name collisions. This is an inherent outcome to plan for when
 using Active/Active replication. By sending/receiving replication data, this concludes the
 Replication exercise. 
+
+# Lab Exercises
+
+## <a id="exercise1_sol"></a> Exercise 1 – Delphix Engine Configuration
+
+1. Connect to your Delphix Engine using Firefox on your lab server. The IP address will be 10.0.x.10,
+where “x” is your Student Number.
+2. Set an email address and new password for the sysadmin user and click Next.
+3. Configure Delphix to use NTP time with the pool.ntp.org NTP server. Change the timezone to your local
+timezone. Then click Next.
+4. Review the network configuration and click Next. Do not make any changes to this section.
+5. Review the disk layout and click Next. Do not make any changes to this section.
+6. Review the Serviceability options and click Next. Do not make any changes to this section.
+7. Review the Authentication Service options and click Next. Do not make any changes to this section.
+8. Click Mark Appliance Registered
+9. Review the summary and click Finish to complete the System configuration.
+10. Click Yes to save the configuration.
+11. Click OK to acknowledge completion
+12. Log in with credentials:
+    
+    a. Username: `delphix_admin`
+
+    b. Password: `delphix`
+
+13. Set an email address and new password for the delphix_admin user
+
+## <a id="exercise2_sol"></a> Exercise 2 – Create delphix_disc login on Source and delphix_db login on Target
+a. Create the “delphix_disc” User on Source Sybase Instance
+In this exercise, you will:
+* Create a Delphix delphix_disc user on your source Sybase Instance.
+
+**Steps**
+
+1. Use Terminal to SSH into your Linux Source (see the Important IP Addresses section of the Getting
+Started guide above).
+2. Login to LINUXSOURCE instance
+    
+    a. Create delphix_disc user with select on privileges on sysdatabases, sysservers, and
+syslisteners.
+
+```
+isql –Usa –Pdelphixdb –SLINUXSOURCE
+sp_addlogin delphix_disc, delphix_disc
+go
+sp_adduser delphix_disc
+go
+grant select on sysdatabases to delphix_disc
+go
+grant select on sysservers to delphix_disc
+go
+grant select on syslisteners to delphix_disc
+go
+exit
+```
+
+`![](./images/image12.png) - Image of the inputs`
+
+    b. Create the "delphix_db" user on Target Sybase Instance
+
+In this exercise, you will:
+• Create a Delphix delphix_disc user on your source Sybase Instance.
+
+**Steps**
+
+1. Use Terminal to SSH into your Linux Source (see the Important IP Addresses section of the Getting
+Started guide above).
+2. Login to TARGET instance
+  
+    a. Grant sa_role to delphix_db login
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+sp_addlogin delphix_db, delphix_db
+go
+sp_adduser delphix_db
+go
+sp_role “grant”, sa_role, delphix_db
+go
+exit
+```
+
+`![](./images/image12.png) - Image of the inputs`
+
+## <a id="exercise3_sol"></a> Exercise 3 – Validate the Source Environment with Hostchecker
+
+Validate Source Environment with Hostchecker
+
+1. Connect to your Linux Source by opening Terminal on your Lab Server and running: conn 10.0.x.20 (‘x’
+will be your **Student Number**).
+2. Ensure you are inside the hostchecker location with the command: `cd /home/delphix/hostchecker`
+3. Run hostchecker.jar with the command: ./hostchecker.sh
+4. Indicate that this machine is a “source” by typing: source
+5. Review the available checks that can be run on this system
+6. Type “1” and press Enter. The script will check homedir permissions and return SUCCESS and ALL
+OK.
+7. Type “3” and press Enter.
+  
+    a. Enter an IP address of: 10.0.x.10 (‘x’ will be your Student Number).
+
+    b. Enter the port 22
+
+    c. The script will test the port and return SUCCESS and ALL OK.
+
+8. Repeat the previous step for the following ports: 80,443
+9. Type “8” and press Enter.
+  
+    a. Enter a password of: `delphix`
+
+    b. The script will test the SSH connectivity to the host and return SUCCESS and ALL OK.
+
+10. Type “9” and press Enter.
+  
+    a. The script will return a WARNING due to permissions. This is normal.
+
+11. Type “10” and press Enter.
+  
+    a. Enter a password of: `delphix`
+  
+    b. The script will test sudo privileges and return SUCCESS and ALL OK
+
+12. Type “11” and press Enter.
+
+    a. Enter a path of: /u01/app/toolkit
+
+    b. The script will test the path and return SUCCESS and ALL OK
+
+13. Type “quit” to exit hostchecker.
 
