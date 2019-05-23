@@ -857,3 +857,334 @@ OK.
 
 13. Type “quit” to exit hostchecker.
 
+### Validate the Target Environment with Hostchecker
+
+1. Connect to your Linux Target A by opening Terminal on your Lab Server and running: conn 10.0.x.30
+(‘x’ will be your Student Number).
+2. Observe the name and location of the hostchecker package by running the command: ls -ltr
+3. Expand the hostchecker package by running: tar -xvf hostchecker_linux_x86.tar
+4. Type: cd hostchecker
+5. Run hostchecker.jar with the command: ./hostchecker.sh
+6. Indicate that this machine is a “target” by typing: target
+7. Review the available checks that can be run on this system
+8. Type “1” and press Enter. The script will check homedir permissions and return SUCCESS and ALL
+OK.
+9. Type “3” and press Enter.
+    
+    a. Enter an IP address of: 10.0.x.10 (‘x’ will be your Student Number).
+    
+    b. Enter the port: 8415
+    
+    c. The script will test the port and return SUCCESS and ALL OK.
+
+10. Repeat the previous step for the following ports: 22,111,1110
+11. Type “8” and press Enter.
+    
+    a. The script will return WARNING due to permissions. This is normal.
+
+12. Type “9” and press Enter.
+    
+    a. Enter a password of: delphix
+    
+    b. The script will test sudo privileges and return SUCCESS and ALL OK
+
+13. Type “10” and press Enter.
+    
+    a. Enter a path of: /u01/app/toolkit
+
+    b. The script will test the path and return SUCCESS and ALL OK
+
+14. Type “quit” to exit hostchecker.
+
+## <a id="exercise4_sol"></a>Exercise 4 – Add a Source and Target Environment
+
+### Adding a Source Environment
+
+1. If you are not already logged in, login to your Delphix Engine as delphix_admin using the password you
+set in the last exercise.
+2. In the top menu bar, click Manage and then Environments. `insert photo`
+3. Click the plus sign next to the word Environments on the top left portion of your screen under the
+Delphix logo.
+4. Enter the following details:
+    
+    a. Environment Name: Source
+    
+    b. Host Address: 10.0.x.20 (‘x’ will be your Student Number)
+    
+    c. OS Username: delphix
+    
+    d. OS Password: delphix
+    
+    e. Toolkit Path: /u01/app/toolkit
+    
+    f. SAP ASE Discovery credentials
+    
+      i. ASE DB Username: delphix_disc
+
+      ii. ASE DB Password: delphix_disc
+
+5. Click OK
+6. Wait for the Environment to be created.
+`insert photo`
+
+### Adding a Target Environment
+1. If you are not already logged in, login to your Delphix Engine as delphix_admin using the password you
+set in the last exercise.
+2. In the top menu bar, click Manage and then Environments.
+3. Click the plus sign next to the word Environments on the top left portion of your screen under the
+Delphix logo.
+4. Enter the following details:
+    a. Environment Name: `Target`
+    
+    b. Host Address: 10.0.x.30 (‘x’ will be your Student Number)
+
+    c. OS Username: `delphix`
+    
+    d. OS Password: `delphix`
+
+    e. Toolkit Path: `/u01/app/toolkit`
+
+    f. SAP ASE Discovery credentials
+
+      i. ASE DB Username: delphix_db
+        
+      ii. ASE DB Password: delphix_db
+
+5. Click OK
+6. Wait for the Environment to be created.
+`insert photo`
+
+## <a id="exercise5_sol"></a>Exercise 5 – Link a dSource
+
+Perform the following steps after the Source and Target Environment is created:
+
+1. SSH to Linux Target A as the delphix user
+Run the following commands:
+
+```
+cd /home/delphix/labs
+./dumpfull_testdb.sh
+```
+`insert photo`
+
+2. Click the Source environment on the left side of the screen
+3. Click the Databases tab (marked by a large database icon) on the right hand side of your screen
+4. Under LINUXSOURCE > testdb, click Add dSource
+
+`insert photo`
+
+5. On dSource Name field, enter testdb
+6. Under the entry testdb, enter the details (case sensitive).
+The username/password you created in Exercise 2.
+    a. Database Username: delphix_disc
+
+    b. DB Password: delphix_disc
+
+    c. Verify Credentials
+
+7. Click Next
+8. Create a new Group called: DB Source
+9. Click Next
+10. Fill up the following information on this page
+    a. On Initial Load, choose Most Recent Existing Full Backup
+    
+    b. Backup Location, Enter: /u02/sybase_back
+
+    c. Staging Environment, choose Target and LINUXTARGET
+
+    d. LogSync, click Enabled
+
+11. Accept defaults for the Hooks
+12. Click Next
+13. Click Finish
+
+You will know this is successful if the dSource completes in the Actions pane without Errors. Click on Actions
+in the top menu bar if you don’t see this pane. 
+
+Click on Delphix logo to go to the home screen. The dSource testdb should be listed under the DB Source
+group.
+
+## <a id="exercise6_sol"></a> Exercise 6 – Create and Save a Hook Operation Template
+
+1. In the top menu bar, click Manage, then Operation Templates
+2. Click the plus sign under the word Templates in the Hook Operation Templates Wizard
+3. Provide the Name: Create APPUSER
+4. Ensure Type is set to: Shell Command
+5. Under Contents, enter the following code:
+
+```
+$SYBASE/OCS-15_0/bin/isql –Usa –Pdelphixdb –SLINUXTARGET << EOF
+sp_addlogin appuser,appuser
+go
+sp_adduser appuser
+go
+EOF
+```
+6. Click Create
+7. Verify the Hook Operation Template is in the list, then click Close
+
+## <a id="exercise7_sol"></a> Exercise 7 – Provision a VDB
+In this exercise, you will:
+* Create a VDB called devdb
+* Use the VDB Configuration Template we created previously
+* Use the Hook Operation Template we created previously
+* Log into the VDB
+* Verify the VDB Configuration Template and Hook Operation Template were successful
+
+**Steps**
+
+1. In the DB Source folder, click testdb object
+2. Click Provision. The Provision VDB wizard will open. 
+3. Click on Target on the left side of the screen
+4. On Database Name, type devdb
+5. Click on Truncate Log On Checkpoint checkbox
+6. Click Next
+7. Click the plus sign to the right of Target Group, and enter the Group Name: DB Targets
+8. Click Next
+9. With Configure Clone already selected on the left side of the Provision VDB Wizard, click the plus sign
+on the right hand side of the wizard
+10. Click the icon with an arrow pointing into a box with the tooltip Import hook operation template
+11. Click on the Create APPUSER template we created earlier, then click Import
+12. Click Next
+13. Verify the summary information, and click Finish
+
+It may take a couple minutes for the VDB creation to complete. You can monitor the progress on the left hand
+side of the screen next to the devdb object in the DB Targets group. On the Actions pane on the right hand
+side of the screen, you should see the Provision virtual database “devdb” item move to the Recently completed
+pane without error. Once the VDB is created, you can verify that the VDB is operational by:
+
+14. SSH to Linux Target A as the delphix user
+15. Run the following commands:
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+sp_helpdb devdb
+go
+sp_displaylogin appuser
+go
+```
+
+This will verify that the VDB is online with the VDB Configuration Template we specified, and that the appuser
+user was created by our hook.
+
+## <a id="exercise8_sol"></a> Exercise 8 – Set a New Retention Policy
+1. In the top menu bar, click on Manage and then Policies
+2. Click on Modify Policy Templates
+3. Under the Retention column, click Apply New Policy
+4. Provide the following details:
+    
+    a. Name: Long Term
+    
+    b. Keep Logs for: 30 days
+    
+    c. Keep Snapshots for: 30 days
+    
+5. Click Advanced
+6. Click the checkbox next to Keep # Monthly(s)
+7. Click OK
+8. Click the Back to Policy Management button
+9. Click on the cell on the devdb row, Retention column. It should currently say Default Retention
+10. Click Long Term in the list that pops up
+
+## <a id="exercise9_sol"></a>Exercise 9 – Refresh a VDB
+
+In this exercise, you will:
+* Create a new table on your source database
+* Snapshot the dSource
+* Refresh your VDB
+* Verify the new table appears on the VDB
+
+**Steps**
+
+1. Connect to your Linux Source server as the delphix user via SSH
+2. Run the following commands:
+
+```
+cd /home/delphix/labs
+isql –Usa –Pdelphixdb –SLINUXSOURCE
+use testdb
+go
+create table t1 ( comments varchar(100))
+go
+insert into t1 values (‘test data’)
+go
+exit
+```
+Take a transaction log dump on devdb
+`./dumptran_testdb.sh`
+
+3. Go back to the Delphix Engine
+4. Wait for a minute or two for Delphix Engine to ingest the new transaction log dump.
+5. Select the devdb VDB and click the small Open button
+6. Refresh the devdb VDB using the latest snapshot from the testdb dSource
+7. Connect to your Linux Target A server as the delphix user via SSH
+8. Run the following commands:
+
+```
+use devdb
+go
+select * from t1
+go
+```
+If this returns a count of row, the snapshot/refresh was successful.
+
+## <a id="exercise10_sol"></a>Exercise 10 – Rewind a VDB
+
+In this exercise, you will:
+* Take a snapshot of the devdb VDB
+* Drop a table in the devdb VDB
+* Rewind the devdb VDB to recover from the action
+
+**Steps**
+
+1. Connect to your Linux Target A server as the delphix user via SSH
+2. Run the following commands:
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+use devdb
+go
+insert into t1 values (‘before rewind’)
+go
+```
+
+3. Take a snapshot of the devdb VDB
+    a. Under Database, expand DB Target folder.
+    
+    b. Under devdb VDB, click camera icon to take a snapshot
+
+4. Run the following commands
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+use devdb
+go
+drop table t1
+go
+```
+
+We just dropped t1 table. Now we will rewind the VDB to that last good snapshot to fix this.
+
+5. Select the devdb VDB
+6. Select the snapshot card associated with the date/time you recorded prior to dropping the table in your
+database.
+7. Rewind the VDB to the snapshot card you took prior to the corruption
+    a. Click on Rewind VDB button.
+
+    b. Click Yes
+
+Once the rewind operation is complete, you can confirm the rewind was successful by connecting to the server
+again and querying the database:
+
+8. Connect to your Linux Target A server as the delphix user via SSH
+9. Run the following commands:
+
+```
+isql –Usa –Pdelphixdb –SLINUXTARGET
+use devdb
+go
+select * from t1
+go
+```
+
+The count should return 2 rows, and the database is online.
