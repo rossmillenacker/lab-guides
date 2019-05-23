@@ -5,49 +5,55 @@ Table of Contents
 
 * [Part I](#part-i)
 
-* [Optional Advanced Exercise – Perform a Storage Performance Test through the CLI](#Optional-Advanced-Exercise-Perform-a-Storage-Performance-Test-through-the-CLI)
+* [Optional Advanced Exercise – Perform a Storage Performance Test through the CLI](#option1)
 
-* [Exercise 1 - Delphix Engine Configuration](#Exercise-1---Delphix-Engine-Configuration)
+* [Exercise 1 - Delphix Engine Configuration](#exercise1)
 
-* [Exercise 2 - Create delphix_disc login on Source and delphix_db login on target](#Exercise-2-Create-delphix_disc-login-on-Source-and-delphix_db-login-on-target)
+* [Exercise 2 - Create delphix_disc login on Source and delphix_db login on target](#exercise2)
 
-* [Exercise 3 - Validate Environment with Hostchecker](#Exercise-3-Validate-Environment-with-Hostchecker)
+* [Exercise 3 - Validate Environment with Hostchecker](#exercise3)
 
-* [Exercise 4 – Add a Source and Target Environment](#Exercise-4-Add-a-Source-and-Target-Environment)
+* [Exercise 4 – Add a Source and Target Environment](#exercise4)
 
-* [Exercise 5 – Link a dSource](#Exercise-5-Link-a-dSource)
+* [Exercise 5 – Link a dSource](#exercise5)
 
 * [PartII](#part-ii)
 
-* [Exercise 6 – Create and Save a Hook Operation Template](#Exercise-6-Create-and-Save-a-Hook-Operation-Template)
+* [Exercise 6 – Create and Save a Hook Operation Template](#exercise6)
 
-* [Exercise 7 – Provision a VDB](#Exercise-7-Provision-a-VDB)
+* [Exercise 7 – Provision a VDB](#exercise7)
 
-* [Exercise 8 – Set a New Retention Policy](#Exercise-8-Set-a-New-Retention-Policy)
+* [Exercise 8 – Set a New Retention Policy](#exercise8)
 
-* [Exercise 9 – Refresh a VDB](#Exercise-9-Refresh-a-VDB)
+* [Exercise 9 – Refresh a VDB](#exercise9)
 
-* [Exercise 10 – Rewind a VDB](#Exercise-10-Rewind-a-VDB)
+* [Exercise 10 – Rewind a VDB](#exercise10)
 
-* [Optional Advanced Exercise – Measure Network Performance through the CLI](#Optional-Advanced-Exercise-Measure-Network-Performance-through-the-CLI)
+* [Optional Advanced Exercise – Measure Network Performance through the CLI](#option2)
+
+* [Optional Advanced Exercise - Configure Delphix Replication](#option3)
 
 * [Lab Solutions](#lab-solutions)
 
 * [Exercise 1 – Delphix Engine	Configuration](#exercise1_sol)
 
-* [Exercise 2 – Create	delphix_disc login on Source and delphix_db	login on Target](#Exercise 2 - Create delphix_disc login on Source and delphix_db login on Target)
+* [Exercise 2 – Create	delphix_disc login on Source and delphix_db	login on Target](#exercise2_sol)
 
-*  [Exercise 3 – Validate the Source & Target Environments with Hostchecker](#Exercise 3 – Validate the Source and Targets Environment with Hostchecker)
+* [Exercise 3 – Validate the Source & Target Environments with Hostchecker]((#exercise3_sol)
 
-*  [Exercise 4 – Add a Source and Target Environment](#Exercise 4 – Add a Source and Target Environment)
+* [Exercise 4 – Add a Source and Target Environment](#exercise4_sol)
 
-*  [Exercise 5 – Link a dSource](#Exercise 5 – Link a dSource)
+* [Exercise 5 – Link a dSource](#exercise5_sol)
 
-*  [Exercise 7 – Provision a VDB](#Exercise 7 – Provision a VDB)
+* [Exercise 6 – Create and Save a Hook Operation Template](#exercise6_sol)
 
-*  [Exercise 9 – Refresh a VDB](#Exercise 9 – Refresh a VDB)
+* [Exercise 7 – Provision a VDB](#exercise7_sol)
 
-*  [Exercise 10 – Rewind a VDB](#Exercise 10 – Rewind a VDB)
+* [Exercise 8 – Set a New Retention Policy](#exercise8_sol)
+
+* [Exercise 9 – Refresh a VDB](#exercise9_sol)
+
+* [Exercise 10 – Rewind a VDB](#exercise10_sol)
 
 Lab Exercises
 =============
@@ -56,8 +62,8 @@ Perform these exercises when instructed by your Delphix Instructor.
 
 Part I
 ======
-Optional Advanced Exercise - Perform a Storage Performance Test through the CLI
--------------------------------------------------------------------------------
+
+## <a id="option1"></a>Optional Advanced Exercise - Perform a Storage Performance Test through the CLI
 
 In this exercise, you will:
 -  Log into the Delphix Engine prior to configuration via the Delphix Command Line Interface (CLI)
@@ -106,8 +112,7 @@ Example Storage Test Configuration
  "[](./images/impage2.png)"
  Example Storage Test Results
 
-Exercise 1 - Delphix Engine Configuration
------------------------------------------
+## <a id="exercise1"></a>Exercise 1 - Delphix Engine Configuration
 
 In this exercise, you will:
 * Access the Delphix Engine GUI for the first time
@@ -145,8 +150,7 @@ left hand side.
 
 **HOLD - PLACEHOLDER FOR DOCS.DELPHIX LINKS ADMIN/SYSADMIN USER ROLES & SETTING UP THE DELPHIX ENGINE**
 
-Exercise 2 - Create delphix_disc login on Source and delphix_db login on target
--------------------------------------------------------------------------------
+## <a id="exercise2"></a>Exercise 2 - Create delphix_disc login on Source and delphix_db login on target
 
 In this exercise, you will:
 * Create a Delphix delphix_disc user on your source Sybase Instance
@@ -196,12 +200,13 @@ Started guide above).
     ```
 
 
-Exercise 3 - Validate Environment with Hostchecker
---------------------------------------------------
+## <a id="exercise3"></a>Exercise 3 - Validate Environment with Hostchecker
+
 **a. Validate Source Environment with Hostchecker**
 
 In this exercise, you will:
   * Use the ‘hostchecker’ program to run validation tests on your Linux Source
+
 **Steps**
     
     a. Use Terminal to SSH into your Linux Source (see the Important IP Addresses section of the Getting
@@ -260,8 +265,7 @@ this exercise.
 Note: The sshd_config test will return a WARNING response, which is normal in a production installation due
 to permissions on the file. If hostchecker is run as root for this test, it will perform the test properly
 
-Exercise 4 - Add a Source and Target Environment
-------------------------------------------------
+## <a id="exercise4"></a>Exercise 4 - Add a Source and Target Environment
 
 In this exercise, you will:
 
@@ -320,8 +324,7 @@ You should now see the Source environment listed under the Environments panel.
 
 You should now see the Target environment listed under the Environments panel
 
-Exercise 5 - Link a dSource
----------------------------
+## <a id="exercise5"></a>Exercise 5 - Link a dSource
 
 Perform the following steps after the Source and Target Environment is created:
 1. SSH to Linux Target A as the delphix user
@@ -368,8 +371,7 @@ in the top menu bar if you don’t see this pane.
 Click on Delphix logo to go to the home screen. The dSource testdb should be listed under the DB Source
 group.
 
-Exercise 6 - Create and Save a Hook Operation Template
-------------------------------------------------------
+## <a id="exercise6"></a>Exercise 6 - Create and Save a Hook Operation Template
 
 In this exercise, you will:
 
@@ -403,8 +405,7 @@ EOF
 2. Verify the Hook Operation Template appears in the list
 3. Click Close to exit the Operation Template screen
 
-Exercise 7 - Provision a VDB
-----------------------------
+## <a id="exercise7"></a>Exercise 7 - Provision a VDB
 
 In this exercise, you will:
 
@@ -438,6 +439,7 @@ Steps
   >pane without error. Once the VDB is created, you can verify that the VDB is operational by:
 3. SSH to Linux Target A as the delphix user
 4. Run the following commands:
+
 ```
 isql –Usa –Pdelphixdb –SLINUXTARGET
 sp_helpdb devdb
@@ -449,8 +451,7 @@ go
 This will verify that the VDB is online with the VDB Operation Template we specified, and that the appuser user
 was created by our hook.
 
-Exercise 8 - Set a New Retention Policy
----------------------------------------
+## <a id="exercise8"></a>Exercise 8 - Set a New Retention Policy
 
 There are four types of Policies in Delphix. In this exercise, you will:
 * Create a Retention Policy
@@ -468,8 +469,7 @@ There are four types of Policies in Delphix. In this exercise, you will:
     
     c. 3 monthly snapshots taken on the 1st of the month
     
-Exercise 9 - Refresh a VDB
---------------------------
+## <a id="exercise9"></a>Exercise 9 - Refresh a VDB
 
 In this exercise, you will:
 
@@ -523,8 +523,7 @@ go
 
 If this returns a count of row, the snapshot/refresh was successful.
 
-Exercise 10 - Rewind a VDB
---------------------------
+## <a id="exercise10"></a>Exercise 10 - Rewind a VDB
 
 In this exercise, you will:
 
@@ -578,8 +577,7 @@ go
 
 The count should return 2 rows, and the database is online.
 
-Optional Advanced Exercise - Measure Network Performance through the CLI
-------------------------------------------------------------------------
+## <a id="option2"></a>Optional Advanced Exercise - Measure Network Performance through the CLI
 
 In this exercise, you will:
 * Log into the Delphix Engine CLI as delphix_admin
@@ -655,8 +653,7 @@ Example Network Throughput Test Submission
  `![](./images/image12.png) - throughput test results example image 6`
 Example Network Throughput Test Results
 
-Optional Advanced Exercise - Configure Delphix Replication
-----------------------------------------------------------
+## <a id="option3"></a>Optional Advanced Exercise - Configure Delphix Replication
 
 Note: This exercise is only possible if your classroom has been configured with 2 or more students.
 
