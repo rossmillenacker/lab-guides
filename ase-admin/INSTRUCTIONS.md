@@ -94,7 +94,8 @@ As an advanced exercise, this lab has no corresponding Lab Solution. Instead, we
     
     d.  Note that this test will take anywhere between 5-10 minutes to complete
 
-![](./images/image1.png)
+![](./photos/image1.png)
+
 Example Storage Test Configuration
 
 4.  View the storage test results
@@ -109,7 +110,8 @@ Example Storage Test Configuration
     
     e.  Then type: commit
     
-    1[](./images/image2.png)"
+    1[](./photos/image2.png)"
+ 
  Example Storage Test Results
 
 ## <a id="exercise1"></a>Exercise 1 - Delphix Engine Configuration
