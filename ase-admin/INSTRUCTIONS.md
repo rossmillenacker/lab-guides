@@ -39,7 +39,7 @@ Table of Contents
 
 * [Exercise 2 – Create	delphix_disc login on Source and delphix_db	login on Target](#exercise2_sol)
 
-* [Exercise 3 – Validate the Source & Target Environments with Hostchecker]((#exercise3_sol)
+* [Exercise 3 – Validate the Source & Target Environments with Hostchecker](#exercise3_sol)
 
 * [Exercise 4 – Add a Source and Target Environment](#exercise4_sol)
 
