@@ -94,7 +94,7 @@ As an advanced exercise, this lab has no corresponding Lab Solution. Instead, we
     
     d.  Note that this test will take anywhere between 5-10 minutes to complete
 
-"![](./images/image1.png)"
+![](./images/image1.png)
 Example Storage Test Configuration
 
 4.  View the storage test results
@@ -109,7 +109,7 @@ Example Storage Test Configuration
     
     e.  Then type: commit
     
- "[](./images/impage2.png)"
+    1[](./images/image2.png)"
  Example Storage Test Results
 
 ## <a id="exercise1"></a>Exercise 1 - Delphix Engine Configuration
@@ -327,12 +327,12 @@ You should now see the Target environment listed under the Environments panel
 ## <a id="exercise5"></a>Exercise 5 - Link a dSource
 
 Perform the following steps after the Source and Target Environment is created:
-1. SSH to Linux Target A as the delphix user
+1. SSH to Linux Source as the delphix user
 
   >Run the following commands:
 
 ```
-  cd /home/delphix/labs
+  cd labs
   ./dumpfull_testdb.sh
 ```
 
@@ -382,7 +382,7 @@ In this exercise, you will:
 
 1. Create a new Hook Operation Template called: Create APPUSER
     
-    a. Select Manage > Operation Templates from the menu
+    a. Select Manage > Hook Templates from the menu
     
     b. Click on the green plus (+) icon
     
