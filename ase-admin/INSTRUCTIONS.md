@@ -110,9 +110,9 @@ Example Storage Test Configuration
     
     e.  Then type: commit
     
-    1[](./photos/image2.png)"
+![](./photos/image2.png)"
  
- Example Storage Test Results
+Example Storage Test Results
 
 ## <a id="exercise1"></a>Exercise 1 - Delphix Engine Configuration
 
