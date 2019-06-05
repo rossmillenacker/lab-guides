@@ -609,7 +609,7 @@ will be your Student Number)
 
     c. Begin the test by typing: commit
 
- `![](./images/image12.png) - latency test submission example image 3`
+![](./photos/image3.png)
  Example Network Latency Test Submission
  
 4. View the results of the latency test:
@@ -622,7 +622,7 @@ will be your Student Number)
 
     d. View the results of the test by typing: get
 
- `![](./images/image12.png) - latency test results example image 4`
+ ![](./photos/image4.png)
 Example Latency Test Results
 
 5. Create a network throughput test
@@ -638,7 +638,7 @@ will be your Student Number)
     
     e. Begin the test by typing: commit
     
- `![](./images/image12.png) - throughput test submission example image 5`
+![](./photos/image5.png)
 Example Network Throughput Test Submission
 
 6. View the results of the throughput test:
@@ -652,7 +652,7 @@ Example Network Throughput Test Submission
 
     d. View the results of the test by typing: get
 
- `![](./images/image12.png) - throughput test results example image 6`
+ ![](./photos/image6.png)
 Example Network Throughput Test Results
 
 ## <a id="option3"></a>Optional Advanced Exercise - Configure Delphix Replication
