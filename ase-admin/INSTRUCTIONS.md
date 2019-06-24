@@ -1002,10 +1002,12 @@ The username/password you created in Exercise 2.
     c. Staging Environment, choose Target and LINUXTARGET
 
     d. LogSync, click Enabled
+![](./photos/image21.png)
 
 11. Accept defaults for the Hooks
 12. Click Next
 13. Click Finish
+![](./photos/image22.png)
 
 You will know this is successful if the dSource completes in the Actions pane without Errors. Click on Actions
 in the top menu bar if you don’t see this pane. 
@@ -1043,7 +1045,11 @@ In 1this exercise, you will:
 **Steps**
 
 1. In the DB Source folder, click testdb object
+![](./photos/image23.png)
+
 2. Click Provision. The Provision VDB wizard will open. 
+![](./photos/image24.png)
+
 3. Click on Target on the left side of the screen
 4. On Database Name, type devdb
 5. Click on Truncate Log On Checkpoint checkbox
