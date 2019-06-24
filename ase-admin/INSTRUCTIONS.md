@@ -948,7 +948,8 @@ Delphix logo.
 
 5. Click OK
 6. Wait for the Environment to be created.
-`insert photo`
+![](./photos/image12.png)
+![](./photos/image13.png)
 
 ## <a id="exercise5_sol"></a>Exercise 5 – Link a dSource
 
@@ -961,13 +962,14 @@ Run the following commands:
 cd /home/delphix/labs
 ./dumpfull_testdb.sh
 ```
-`insert photo`
+![](./photos/image14.png)
 
 2. Click the Source environment on the left side of the screen
 3. Click the Databases tab (marked by a large database icon) on the right hand side of your screen
 4. Under LINUXSOURCE > testdb, click Add dSource
 
-`insert photo`
+![](./photos/image15.png)
+![](./photos/image16.png)
 
 5. On dSource Name field, enter testdb
 6. Under the entry testdb, enter the details (case sensitive).
@@ -993,6 +995,7 @@ The username/password you created in Exercise 2.
 11. Accept defaults for the Hooks
 12. Click Next
 13. Click Finish
+![](./photos/image17.png)
 
 You will know this is successful if the dSource completes in the Actions pane without Errors. Click on Actions
 in the top menu bar if you don’t see this pane. 
