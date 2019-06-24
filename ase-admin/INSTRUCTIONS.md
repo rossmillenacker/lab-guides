@@ -700,9 +700,6 @@ example, in a class with 3 students:
 5. Once the initial full replication is complete, you will see a message stating “Last Replication
 Successful.”
 
- `![](./images/image12.png) - Replication Success Screen - Image 7`
- Example Successful Replication
- 
 6. Check the results on your target Delphix Engine
   
     a. In your lab server browser, enter the IP address you used for the Target Engine in your replica
@@ -718,8 +715,6 @@ says Available which is the default Namespace for Delphix replica targets.
     d. In order to see the replica objects, click on the dropdown list and select the second entry, which
 should be the IP address of the Source Delphix Engine that sent the replica.
 
- `![](./images/image12.png) - Example Replica Namespace View - Image 8`
- Example Replica Namespace View
  
 7. While still logged into your target Delphix Engine, click on System and then Replication
 8. Observe the Received Replicas section at the bottom, indicating and verifying the target’s receipt of
@@ -783,7 +778,7 @@ go
 exit
 ```
 
-`![](./images/image12.png) - Image of the inputs`
+![](./photos/image7.png)
 
     b. Create the "delphix_db" user on Target Sybase Instance
 
@@ -809,7 +804,7 @@ go
 exit
 ```
 
-`![](./images/image12.png) - Image of the inputs`
+![](./photos/image8.png)
 
 ## <a id="exercise3_sol"></a> Exercise 3 – Validate the Source Environment with Hostchecker
 
@@ -901,7 +896,8 @@ OK.
 
 1. If you are not already logged in, login to your Delphix Engine as delphix_admin using the password you
 set in the last exercise.
-2. In the top menu bar, click Manage and then Environments. `insert photo`
+2. In the top menu bar, click Manage and then Environments. 
+![](./photos/image9.png)
 3. Click the plus sign next to the word Environments on the top left portion of your screen under the
 Delphix logo.
 4. Enter the following details:
@@ -924,7 +920,8 @@ Delphix logo.
 
 5. Click OK
 6. Wait for the Environment to be created.
-`insert photo`
+![](./photos/image10.png)
+![](./photos/image11.png)
 
 ### Adding a Target Environment
 1. If you are not already logged in, login to your Delphix Engine as delphix_admin using the password you
