@@ -337,6 +337,7 @@ Perform the following steps after the Source and Target Environment is created:
   cd labs
   ./dumpfull_testdb.sh
 ```
+*Special Note*: This lab has a specific configuration that leverages the Target Host as a Staging Host. This is fine for simple use cases. However, for optimal performance, the two should be separate. In order to complete this lab, you must register the Target Host as the Staging Host as well. This is done by accessing the Target Host from the "Environments" tab, selecting LINUXTARGET, and the clicking the "Use as Staging" option accessed via the "edit" icon.
 
 2. From the Delphix admin console click the Source environment on the left side of the screen
 3. Click the Databases tab (marked by a large database icon) on the right hand side of your screen
@@ -917,11 +918,11 @@ Delphix logo.
       i. ASE DB Username: delphix_disc
 
       ii. ASE DB Password: delphix_disc
+![](./photos/image10.png)
+![](./photos/image11.png)
 
 5. Click OK
 6. Wait for the Environment to be created.
-![](./photos/image10.png)
-![](./photos/image11.png)
 
 ### Adding a Target Environment
 1. If you are not already logged in, login to your Delphix Engine as delphix_admin using the password you
@@ -945,11 +946,12 @@ Delphix logo.
       i. ASE DB Username: delphix_db
         
       ii. ASE DB Password: delphix_db
+![](./photos/image12.png)
+![](./photos/image13.png)
 
 5. Click OK
 6. Wait for the Environment to be created.
-![](./photos/image12.png)
-![](./photos/image13.png)
+
 
 ## <a id="exercise5_sol"></a>Exercise 5 – Link a dSource
 
@@ -964,11 +966,16 @@ cd /home/delphix/labs
 ```
 ![](./photos/image14.png)
 
-2. Click the Source environment on the left side of the screen
-3. Click the Databases tab (marked by a large database icon) on the right hand side of your screen
-4. Under LINUXSOURCE > testdb, click Add dSource
+Special Note: This lab has a specific configuration that leverages the Target Host as a Staging Host. This is fine for simple use cases. However, for optimal performance, the two should be separate. In order to complete this lab, you must register the Target Host as the Staging Host as well. This is done by accessing the Target Host from the "Environments" tab, selecting LINUXTARGET, and the clicking the "Use as Staging" option accessed via the "edit" icon.
+![](./photos/image19.png)
+![](./photos/image20.png)
 
+2. Click the Source environment on the left side of the screen
+
+3. Click the Databases tab (marked by a large database icon) on the right hand side of your screen
 ![](./photos/image15.png)
+
+4. Under LINUXSOURCE > testdb, click Add dSource
 ![](./photos/image16.png)
 
 5. On dSource Name field, enter testdb
@@ -980,8 +987,12 @@ The username/password you created in Exercise 2.
 
     c. Verify Credentials
 
+![](./photos/image17.png)
+
 7. Click Next
 8. Create a new Group called: DB Source
+![](./photos/image18.png)
+
 9. Click Next
 10. Fill up the following information on this page
     a. On Initial Load, choose Most Recent Existing Full Backup
@@ -995,7 +1006,6 @@ The username/password you created in Exercise 2.
 11. Accept defaults for the Hooks
 12. Click Next
 13. Click Finish
-![](./photos/image17.png)
 
 You will know this is successful if the dSource completes in the Actions pane without Errors. Click on Actions
 in the top menu bar if you don’t see this pane. 
@@ -1023,7 +1033,7 @@ EOF
 7. Verify the Hook Operation Template is in the list, then click Close
 
 ## <a id="exercise7_sol"></a> Exercise 7 – Provision a VDB
-In this exercise, you will:
+In 1this exercise, you will:
 * Create a VDB called devdb
 * Use the VDB Configuration Template we created previously
 * Use the Hook Operation Template we created previously
