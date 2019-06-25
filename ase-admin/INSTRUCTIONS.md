@@ -1017,7 +1017,9 @@ group.
 
 ## <a id="exercise6_sol"></a> Exercise 6 – Create and Save a Hook Operation Template
 
-1. In the top menu bar, click Manage, then Operation Templates
+1. In the top menu bar, click Manage, then Hook Templates
+![](./photos/image30.png)
+
 2. Click the plus sign under the word Templates in the Hook Operation Templates Wizard
 3. Provide the Name: Create APPUSER
 4. Ensure Type is set to: Shell Command
@@ -1025,12 +1027,14 @@ group.
 
 ```
 $SYBASE/OCS-15_0/bin/isql –Usa –Pdelphixdb –SLINUXTARGET << EOF
-sp_addlogin appuser,appuser
+sp_addlogin appuser, appuser
 go
 sp_adduser appuser
 go
 EOF
 ```
+![](./photos/image31.png)
+
 6. Click Create
 7. Verify the Hook Operation Template is in the list, then click Close
 
@@ -1051,8 +1055,12 @@ In 1this exercise, you will:
 ![](./photos/image24.png)
 
 3. Click on Target on the left side of the screen
+![](./photos/image25.png)
+
 4. On Database Name, type devdb
 5. Click on Truncate Log On Checkpoint checkbox
+![](./photos/image26.png)
+
 6. Click Next
 7. Click the plus sign to the right of Target Group, and enter the Group Name: DB Targets
 8. Click Next
@@ -1060,6 +1068,10 @@ In 1this exercise, you will:
 on the right hand side of the wizard
 10. Click the icon with an arrow pointing into a box with the tooltip Import hook operation template
 11. Click on the Create APPUSER template we created earlier, then click Import
+![](./photos/image27.png)
+![](./photos/image28.png)
+![](./photos/image29.png)
+
 12. Click Next
 13. Verify the summary information, and click Finish
 
@@ -1078,6 +1090,7 @@ go
 sp_displaylogin appuser
 go
 ```
+![](./photos/image32.png)
 
 This will verify that the VDB is online with the VDB Configuration Template we specified, and that the appuser
 user was created by our hook.
