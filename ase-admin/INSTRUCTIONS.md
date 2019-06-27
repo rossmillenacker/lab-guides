@@ -1097,8 +1097,12 @@ user was created by our hook.
 
 ## <a id="exercise8_sol"></a> Exercise 8 – Set a New Retention Policy
 1. In the top menu bar, click on Manage and then Policies
+![](./photos/image33.png)
+
 2. Click on Modify Policy Templates
 3. Under the Retention column, click Apply New Policy
+![](./photos/image34.png)
+
 4. Provide the following details:
     
     a. Name: Long Term
@@ -1106,13 +1110,17 @@ user was created by our hook.
     b. Keep Logs for: 30 days
     
     c. Keep Snapshots for: 30 days
-    
+![](./photos/image35.png)
+
 5. Click Advanced
 6. Click the checkbox next to Keep # Monthly(s)
 7. Click OK
 8. Click the Back to Policy Management button
 9. Click on the cell on the devdb row, Retention column. It should currently say Default Retention
+![](./photos/image36.png)
+
 10. Click Long Term in the list that pops up
+![](./photos/image37.png)
 
 ## <a id="exercise9_sol"></a>Exercise 9 – Refresh a VDB
 
@@ -1138,13 +1146,20 @@ insert into t1 values (‘test data’)
 go
 exit
 ```
+![](./photos/image38.png)
+
 Take a transaction log dump on devdb
 `./dumptran_testdb.sh`
+![](./photos/image39.png)
 
 3. Go back to the Delphix Engine
 4. Wait for a minute or two for Delphix Engine to ingest the new transaction log dump.
 5. Select the devdb VDB and click the small Open button
 6. Refresh the devdb VDB using the latest snapshot from the testdb dSource
+![](./photos/image40.png)
+![](./photos/image41.png)
+![](./photos/image42.png)
+
 7. Connect to your Linux Target A server as the delphix user via SSH
 8. Run the following commands:
 
@@ -1154,6 +1169,8 @@ go
 select * from t1
 go
 ```
+![](./photos/image43.png)
+
 If this returns a count of row, the snapshot/refresh was successful.
 
 ## <a id="exercise10_sol"></a>Exercise 10 – Rewind a VDB
@@ -1175,11 +1192,14 @@ go
 insert into t1 values (‘before rewind’)
 go
 ```
+![](./photos/image44.png)
 
 3. Take a snapshot of the devdb VDB
     a. Under Database, expand DB Target folder.
     
     b. Under devdb VDB, click camera icon to take a snapshot
+![](./photos/image45.png)
+
 
 4. Run the following commands
 
@@ -1190,6 +1210,7 @@ go
 drop table t1
 go
 ```
+![](./photos/image46.png)
 
 We just dropped t1 table. Now we will rewind the VDB to that last good snapshot to fix this.
 
@@ -1200,6 +1221,9 @@ database.
     a. Click on Rewind VDB button.
 
     b. Click Yes
+![](./photos/image47.png)
+![](./photos/image48.png)
+![](./photos/image49.png)
 
 Once the rewind operation is complete, you can confirm the rewind was successful by connecting to the server
 again and querying the database:
@@ -1214,5 +1238,6 @@ go
 select * from t1
 go
 ```
+![](./photos/image50.png)
 
 The count should return 2 rows, and the database is online.
