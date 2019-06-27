@@ -55,12 +55,12 @@ Table of Contents
 
 * [Exercise 10 – Rewind a VDB](#exercise10_sol)
 
-Lab Exercises
+## <a id="lab-exercises"></a>Lab Exercises
 =============
 
 Perform these exercises when instructed by your Delphix Instructor.
 
-Part I
+## <a id="part-i"></a>Part I
 ======
 
 ## <a id="option1"></a>Optional Advanced Exercise - Perform a Storage Performance Test through the CLI
@@ -373,6 +373,8 @@ in the top menu bar if you don’t see this pane.
 
 Click on Delphix logo to go to the home screen. The dSource testdb should be listed under the DB Source
 group.
+
+## <a id="part-ii"></a>Part II
 
 ## <a id="exercise6"></a>Exercise 6 - Create and Save a Hook Operation Template
 
@@ -725,7 +727,7 @@ engine are deleted due to object name collisions. This is an inherent outcome to
 using Active/Active replication. By sending/receiving replication data, this concludes the
 Replication exercise. 
 
-# Lab Exercises
+# <a id="lab-solutions"></a>Lab Solutions
 
 ## <a id="exercise1_sol"></a> Exercise 1 – Delphix Engine Configuration
 
